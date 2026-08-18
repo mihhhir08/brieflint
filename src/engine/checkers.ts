@@ -40,13 +40,17 @@ const fileCount: Checker = (rule, artifacts) => {
 };
 
 const fileName: Checker = (rule, artifacts) => {
-  const expected = String(rule.expected.equal ?? "");
-  const match = artifacts.find((artifact) => artifact.name === expected);
-  return base(rule, match ? "pass" : "fail", `file named ${expected}`, match ? `${expected} is present` : `${expected} was not found`, artifacts.map((item) => item.name), match ? undefined : `Rename or add the required file: ${expected}.`);
+  const expected = typeof rule.expected.equal === "string" ? rule.expected.equal : undefined;
+  const pattern = rule.expected.matches;
+  const regex = pattern ? new RegExp(`^${pattern.replace(/[.+^${}()|[\]\\]/g, "\\$&").replaceAll("*", ".*").replaceAll("?", ".")}$`, "i") : undefined;
+  const match = artifacts.find((artifact) => expected ? artifact.name === expected : regex?.test(artifact.name));
+  const target = expected ?? pattern ?? "the required pattern";
+  return base(rule, match ? "pass" : "fail", expected ? `file named ${target}` : `filename matching ${target}`, match ? `${match.name} is present` : `${target} was not found`, artifacts.map((item) => item.name), match ? undefined : `Rename or add a file that matches ${target}.`);
 };
 
 const fileExtension: Checker = (rule, artifacts) => {
   const allowed = (rule.expected.oneOf ?? []).map((item) => item.replace(/^\./, "").toLowerCase());
+  if (!artifacts.length) return base(rule, "skipped", `extensions: ${allowed.join(", ")}`, "No files were available", [], "Add the files described by this requirement.");
   const invalid = artifacts.filter((artifact) => !allowed.includes(extension(artifact.name)));
   return base(rule, invalid.length ? "fail" : "pass", `extensions: ${allowed.join(", ")}`, invalid.length ? `${invalid.length} ${invalid.length === 1 ? "file uses" : "files use"} another extension` : "All files use allowed extensions", artifacts.map((item) => `${item.name} (.${extension(item.name) || "none"})`), invalid.length ? "Convert or replace files that use an unsupported extension." : undefined);
 };

@@ -1,10 +1,10 @@
 # BriefLint product requirements
 
-Status: Approved for implementation
+Status: Implemented for v0.1 public alpha
 
 Target: v0.1 public alpha
 
-Last updated: 2026-08-17
+Last updated: 2026-08-18
 
 ## 1. Product summary
 

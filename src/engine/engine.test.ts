@@ -82,3 +82,23 @@ test("pack parser rejects malformed nested rule data", () => {
   assert.throws(() => parsePack(malformedScope), /invalid scope extensions/);
   assert.throws(() => parsePack(malformedState), /enabled state/);
 });
+
+test("filename globs are safe, useful, and evidence-backed", () => {
+  const pack = compileBrief("Confirm the rendered export follows the approved name pattern.");
+  pack.rules[0] = {
+    ...pack.rules[0],
+    checker: "file.name",
+    expected: { matches: "campaign-*.webp" },
+  };
+  const run = runPreflight(pack, [{ id: "hero", name: "campaign-autumn.webp", size: 120 }]);
+
+  assert.equal(run.results[0].status, "pass");
+  assert.equal(run.results[0].observation, "campaign-autumn.webp is present");
+});
+
+test("an extension requirement without files cannot pass", () => {
+  const pack = compileBrief("Submit one PDF file.");
+  pack.rules = pack.rules.filter((rule) => rule.checker === "file.extension");
+
+  assert.equal(runPreflight(pack, []).results[0].status, "skipped");
+});

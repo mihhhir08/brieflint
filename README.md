@@ -93,6 +93,7 @@ Read [security and limitations](docs/SECURITY.md) before using BriefLint for sen
 - [Project charter](docs/PROJECT_CHARTER.md)
 - [Market evidence](docs/research/MARKET_EVIDENCE.md)
 - [Brand system](docs/BRAND.md)
+- [Quality report](docs/QA.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Contributing](CONTRIBUTING.md)
 

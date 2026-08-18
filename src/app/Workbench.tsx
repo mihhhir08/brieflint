@@ -42,8 +42,10 @@ function downloadJson(filename: string, value: unknown) {
   const anchor = document.createElement("a");
   anchor.href = url;
   anchor.download = filename;
+  document.body.append(anchor);
   anchor.click();
-  URL.revokeObjectURL(url);
+  anchor.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 function ExpectedEditor({ rule, onChange }: { rule: Rule; onChange: (rule: Rule) => void }) {
@@ -54,7 +56,7 @@ function ExpectedEditor({ rule, onChange }: { rule: Rule; onChange: (rule: Rule)
 
   if (rule.checker === "file.count") return <input aria-label="Expected file count" type="number" min="0" value={rule.expected.equal ?? ""} onChange={(event) => update("equal", event.target.value)} />;
   if (rule.checker === "file.name") return <input aria-label="Expected filename" value={rule.expected.equal ?? ""} onChange={(event) => update("equal", event.target.value)} />;
-  if (rule.checker === "file.extension") return <span className="expectation-copy">{rule.expected.oneOf?.map((item) => `.${item}`).join(", ")}</span>;
+  if (rule.checker === "file.extension") return <input aria-label="Allowed extensions" value={rule.expected.oneOf?.join(", ") ?? ""} onChange={(event) => onChange({ ...rule, expected: { oneOf: event.target.value.split(",").map((item) => item.trim().replace(/^\./, "")).filter(Boolean) } })} />;
   if (rule.checker === "file.maxSize") return <input aria-label="Maximum bytes" type="number" min="0" value={rule.expected.max ?? ""} onChange={(event) => update("max", event.target.value)} />;
   if (rule.checker === "text.wordCount") return (
     <div className="range-inputs">
@@ -100,11 +102,11 @@ function RulePlan({ pack, setPack }: { pack: PreflightPack; setPack: (pack: Pref
           {pack.rules.map((rule) => (
             <article className={`rule-row ${rule.enabled ? "" : "is-disabled"}`} key={rule.id}>
               <label className="toggle" title={rule.enabled ? "Disable rule" : "Enable rule"}>
-                <input type="checkbox" checked={rule.enabled} onChange={(event) => updateRule({ ...rule, enabled: event.target.checked })} />
+                <input type="checkbox" aria-label={`${rule.enabled ? "Disable" : "Enable"} rule: ${rule.source}`} checked={rule.enabled} onChange={(event) => updateRule({ ...rule, enabled: event.target.checked })} />
                 <span aria-hidden="true"><Check /></span>
               </label>
               <div className="rule-copy">
-                <input className="rule-source" aria-label="Requirement source" value={rule.source} onChange={(event) => updateRule({ ...rule, source: event.target.value })} />
+                <input className="rule-source" aria-label="Requirement source" value={rule.source} onChange={(event) => updateRule({ ...rule, source: event.target.value, expected: rule.checker === "manual.confirm" ? { prompt: event.target.value } : rule.expected })} />
                 <div className="rule-meta">
                   <code>{rule.checker}</code>
                   <ExpectedEditor rule={rule} onChange={updateRule} />
@@ -195,7 +197,7 @@ export function Workbench() {
           <div className="intro-actions">
             <button className="secondary-button" type="button" onClick={loadDemo}><Flask /> Load demo</button>
             <button className="secondary-button" type="button" onClick={() => packInput.current?.click()}><UploadSimple /> Import pack</button>
-            <input ref={packInput} className="sr-only" type="file" accept="application/json,.json" onChange={(event) => importPack(event.target.files?.[0])} />
+            <input ref={packInput} className="sr-only" type="file" tabIndex={-1} aria-hidden="true" accept="application/json,.json" onChange={(event) => importPack(event.target.files?.[0])} />
           </div>
         </div>
 
@@ -234,7 +236,7 @@ export function Workbench() {
               <strong>Drop the package here</strong>
               <span>or choose files from this device</span>
             </button>
-            <input ref={fileInput} className="sr-only" type="file" multiple onChange={(event) => void addFiles(Array.from(event.target.files ?? []))} />
+            <input ref={fileInput} className="sr-only" type="file" tabIndex={-1} aria-hidden="true" multiple onChange={(event) => void addFiles(Array.from(event.target.files ?? []))} />
             {artifacts.length > 0 && (
               <div className="file-list">
                 {artifacts.map((artifact) => (

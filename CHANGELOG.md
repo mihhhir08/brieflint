@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-18
+
 ### Added
 
 - Local requirement compiler for common file and text constraints
@@ -14,10 +16,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Browser workspace with editable rule plans and local file inspection
 - Original responsive landing page and brand system
 - Assignment and creator example packs
-
-## [0.1.0] - 2026-08-17
-
-Initial public alpha foundation.
+- CI, community templates, pack schema, and verified release documentation
 
 [Unreleased]: https://github.com/mihhhir08/brieflint/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/mihhhir08/brieflint/releases/tag/v0.1.0

@@ -14,7 +14,7 @@ function validExpected(checker: CheckerName, expected: Record<string, unknown>):
   const text = (key: string) => typeof expected[key] === "string" && Boolean((expected[key] as string).trim());
 
   if (checker === "file.count") return number("equal") || number("min") || number("max");
-  if (checker === "file.name") return text("equal");
+  if (checker === "file.name") return text("equal") || text("matches");
   if (checker === "file.extension") return stringArray(expected.oneOf) && expected.oneOf.length > 0;
   if (checker === "file.maxSize") return number("max") && (expected.max as number) >= 0;
   if (checker === "text.wordCount") return number("min") || number("max");

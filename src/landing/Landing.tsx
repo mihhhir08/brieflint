@@ -68,7 +68,6 @@ function EvidencePreview() {
 }
 
 export function Landing() {
-  const reduce = useReducedMotion();
   return (
     <div className="landing">
       <header className="landing-header">
@@ -92,15 +91,10 @@ export function Landing() {
               <a className="landing-secondary" href="https://github.com/mihhhir08/brieflint">View on GitHub <GithubLogo weight="fill" /></a>
             </div>
           </div>
-          <motion.figure
-            className="hero-visual"
-            initial={reduce ? false : { opacity: 0, scale: 0.975 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <figure className="hero-visual">
             <img src="/images/hero-preflight.webp" width="1536" height="1024" fetchPriority="high" alt="Documents, ruler, pencil, and a checked inspection slip arranged for final review" />
             <figcaption><ShieldCheck weight="fill" /> Nothing uploaded. Nothing guessed.</figcaption>
-          </motion.figure>
+          </figure>
         </section>
 
         <section className="manifesto" id="how-it-works">
