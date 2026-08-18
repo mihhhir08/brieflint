@@ -27,7 +27,7 @@ function compareCount(value: number, rule: Rule): boolean {
 function expectationRange(rule: Rule, unit: string): string {
   const { equal, min, max } = rule.expected;
   if (equal !== undefined) return `${equal} ${unit}`;
-  if (min !== undefined && max !== undefined) return `${min}–${max} ${unit}`;
+  if (min !== undefined && max !== undefined) return `${min}-${max} ${unit}`;
   if (min !== undefined) return `at least ${min} ${unit}`;
   return `at most ${max} ${unit}`;
 }

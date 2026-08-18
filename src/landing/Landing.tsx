@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   ArrowUpRight,
-  Check,
   CheckCircle,
   FileText,
   GithubLogo,
@@ -71,7 +70,7 @@ export function Landing() {
   return (
     <div className="landing">
       <header className="landing-header">
-        <a className="brand" href="/" aria-label="BriefLint home"><span className="brand-mark"><Check weight="bold" /></span>BriefLint</a>
+        <a className="brand" href="/" aria-label="BriefLint home"><span className="brand-wordmark">Brief<span>Lint</span></span></a>
         <nav className="landing-nav-links" aria-label="Main navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#use-cases">Use cases</a>
@@ -87,7 +86,7 @@ export function Landing() {
             <h1><span>Before you send it,</span><span>prove it.</span></h1>
             <p>Turn any brief into evidence-backed checks. Run them locally against the files you plan to submit.</p>
             <div className="hero-actions">
-              <a className="landing-primary" href="/app">Try the workspace <ArrowRight /></a>
+              <a className="landing-primary" href="/app">Open workspace <ArrowRight /></a>
               <a className="landing-secondary" href="https://github.com/mihhhir08/brieflint">View on GitHub <GithubLogo weight="fill" /></a>
             </div>
           </div>
@@ -162,12 +161,12 @@ export function Landing() {
             <h2>Make the last check count.</h2>
             <p>Paste a brief. Add the files. Leave with evidence.</p>
           </div>
-          <a className="landing-primary" href="/app">Open BriefLint <ArrowRight /></a>
+          <a className="landing-primary" href="/app">Open workspace <ArrowRight /></a>
         </section>
       </main>
 
       <footer className="landing-footer">
-        <a className="brand footer-brand" href="/"><span className="brand-mark"><Check weight="bold" /></span>BriefLint</a>
+        <a className="brand footer-brand" href="/"><span className="brand-wordmark">Brief<span>Lint</span></span></a>
         <p>Built in the open. Files stay on your device.</p>
         <div><a href="https://github.com/mihhhir08/brieflint">GitHub</a><a href="https://github.com/mihhhir08/brieflint/blob/main/LICENSE">Apache 2.0</a></div>
       </footer>

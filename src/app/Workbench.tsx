@@ -181,7 +181,7 @@ export function Workbench() {
   return (
     <div className="workbench-shell">
       <header className="app-header">
-        <a className="brand" href="/" aria-label="BriefLint home"><span className="brand-mark"><Check weight="bold" /></span>BriefLint</a>
+        <a className="brand" href="/" aria-label="BriefLint home"><span className="brand-wordmark">Brief<span>Lint</span></span></a>
         <div className="header-actions">
           <span className="local-note"><LockKey /> Files stay local</span>
           <a className="icon-link" href="https://github.com/mihhhir08/brieflint" aria-label="BriefLint on GitHub"><GithubLogo weight="fill" /></a>
