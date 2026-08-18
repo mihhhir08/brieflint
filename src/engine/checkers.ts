@@ -35,7 +35,8 @@ function expectationRange(rule: Rule, unit: string): string {
 const fileCount: Checker = (rule, artifacts) => {
   const matches = artifacts.filter((artifact) => inScope(artifact, rule));
   const ok = compareCount(matches.length, rule);
-  return base(rule, ok ? "pass" : "fail", expectationRange(rule, "matching file(s)"), `${matches.length} matching file(s) found`, matches.map((item) => item.name), ok ? undefined : "Add or remove files so the package matches the required count.");
+  const unit = matches.length === 1 ? "matching file" : "matching files";
+  return base(rule, ok ? "pass" : "fail", expectationRange(rule, "matching files"), `${matches.length} ${unit} found`, matches.map((item) => item.name), ok ? undefined : "Add or remove files so the package matches the required count.");
 };
 
 const fileName: Checker = (rule, artifacts) => {
@@ -47,7 +48,7 @@ const fileName: Checker = (rule, artifacts) => {
 const fileExtension: Checker = (rule, artifacts) => {
   const allowed = (rule.expected.oneOf ?? []).map((item) => item.replace(/^\./, "").toLowerCase());
   const invalid = artifacts.filter((artifact) => !allowed.includes(extension(artifact.name)));
-  return base(rule, invalid.length ? "fail" : "pass", `extensions: ${allowed.join(", ")}`, invalid.length ? `${invalid.length} file(s) use another extension` : "All files use allowed extensions", artifacts.map((item) => `${item.name} (.${extension(item.name) || "none"})`), invalid.length ? "Convert or replace files that use an unsupported extension." : undefined);
+  return base(rule, invalid.length ? "fail" : "pass", `extensions: ${allowed.join(", ")}`, invalid.length ? `${invalid.length} ${invalid.length === 1 ? "file uses" : "files use"} another extension` : "All files use allowed extensions", artifacts.map((item) => `${item.name} (.${extension(item.name) || "none"})`), invalid.length ? "Convert or replace files that use an unsupported extension." : undefined);
 };
 
 const fileMaxSize: Checker = (rule, artifacts) => {
@@ -55,7 +56,7 @@ const fileMaxSize: Checker = (rule, artifacts) => {
   if (!matches.length) return base(rule, "skipped", "matching files within the size limit", "No compatible file was available", [], "Add the file described by this requirement.");
   const max = rule.expected.max ?? 0;
   const oversized = matches.filter((artifact) => artifact.size > max);
-  return base(rule, oversized.length ? "fail" : "pass", `at most ${max} bytes per file`, oversized.length ? `${oversized.length} file(s) exceed the limit` : "All matching files are within the limit", matches.map((item) => `${item.name}: ${item.size} bytes`), oversized.length ? "Compress or replace the oversized file." : undefined);
+  return base(rule, oversized.length ? "fail" : "pass", `at most ${max} bytes per file`, oversized.length ? `${oversized.length} ${oversized.length === 1 ? "file exceeds" : "files exceed"} the limit` : "All matching files are within the limit", matches.map((item) => `${item.name}: ${item.size} bytes`), oversized.length ? "Compress or replace the oversized file." : undefined);
 };
 
 function readable(rule: Rule, artifacts: Artifact[]): Artifact[] {
@@ -67,7 +68,7 @@ const wordCount: Checker = (rule, artifacts) => {
   if (!matches.length) return base(rule, "skipped", expectationRange(rule, "words"), "No readable text was available", [], "Use a supported text file or verify this requirement manually.");
   const counts = matches.map((artifact) => ({ artifact, count: artifact.text!.trim() ? artifact.text!.trim().split(/\s+/).length : 0 }));
   const failed = counts.filter(({ count }) => !compareCount(count, rule));
-  return base(rule, failed.length ? "fail" : "pass", expectationRange(rule, "words"), failed.length ? `${failed.length} file(s) fall outside the range` : "All matching files are within the word range", counts.map(({ artifact, count }) => `${artifact.name}: ${count} words`), failed.length ? "Adjust the text length and run the preflight again." : undefined);
+  return base(rule, failed.length ? "fail" : "pass", expectationRange(rule, "words"), failed.length ? `${failed.length} ${failed.length === 1 ? "file falls" : "files fall"} outside the range` : "All matching files are within the word range", counts.map(({ artifact, count }) => `${artifact.name}: ${count} words`), failed.length ? "Adjust the text length and run the preflight again." : undefined);
 };
 
 const includesText: Checker = (rule, artifacts) => {
