@@ -97,7 +97,7 @@ function compileStatement(source: string, index: number): Rule[] {
 
   const sizeMatch = lower.match(/(?:under|less than|no (?:more|larger) than|maximum|max(?:imum)?(?: of)?)\s*([\d.]+)\s*(kb|mb|gb)\b/);
   if (sizeMatch) {
-    const multiplier = { kb: 1024, mb: 1024 ** 2, gb: 1024 ** 3 }[sizeMatch[2]];
+    const multiplier = ({ kb: 1024, mb: 1024 ** 2, gb: 1024 ** 3 } as Record<string, number>)[sizeMatch[2]];
     rules.push(rule(source, index, "file.maxSize", { max: Math.round(Number(sizeMatch[1]) * multiplier) }));
   }
 
