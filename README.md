@@ -24,7 +24,15 @@ The project is currently in product-definition stage. Implementation begins only
 
 ## Status
 
-See the [project charter](docs/PROJECT_CHARTER.md) and [market evidence](docs/research/MARKET_EVIDENCE.md). The PRD and technical architecture are the next milestone.
+The implementation contract is documented before code:
+
+- [Product requirements](docs/PRD.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Security and trust model](docs/SECURITY.md)
+- [Preflight pack specification](docs/PREFLIGHT_PACK_SPEC.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Project charter](docs/PROJECT_CHARTER.md)
+- [Market evidence](docs/research/MARKET_EVIDENCE.md)
 
 ## License
 
