@@ -71,3 +71,14 @@ test("pack parser rejects executable or unknown checker names", () => {
 
   assert.throws(() => parsePack(unsafe), /Unknown checker/);
 });
+
+test("pack parser rejects malformed nested rule data", () => {
+  const pack = compileBrief("Submit exactly one PDF file.");
+  const malformedScope = structuredClone(pack) as unknown as { rules: Array<{ scope: unknown }> };
+  malformedScope.rules[0].scope = { extensions: "pdf" };
+  const malformedState = structuredClone(pack) as unknown as { rules: Array<{ enabled: unknown }> };
+  malformedState.rules[0].enabled = "yes";
+
+  assert.throws(() => parsePack(malformedScope), /invalid scope extensions/);
+  assert.throws(() => parsePack(malformedState), /enabled state/);
+});

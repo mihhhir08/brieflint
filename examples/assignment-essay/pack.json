@@ -1,0 +1,16 @@
+{
+  "$schema": "https://brieflint.dev/schema/pack-v1.json",
+  "version": 1,
+  "id": "examples.assignment-essay",
+  "name": "Assignment essay",
+  "description": "Checks a short Markdown essay package.",
+  "rules": [
+    { "id": "file-count", "source": "Submit exactly one Markdown file named final-essay.md.", "checker": "file.count", "scope": { "extensions": ["md"] }, "expected": { "equal": 1 }, "severity": "required", "enabled": true },
+    { "id": "file-name", "source": "Submit exactly one Markdown file named final-essay.md.", "checker": "file.name", "scope": {}, "expected": { "equal": "final-essay.md" }, "severity": "required", "enabled": true },
+    { "id": "file-extension", "source": "Submit exactly one Markdown file named final-essay.md.", "checker": "file.extension", "scope": {}, "expected": { "oneOf": ["md"] }, "severity": "required", "enabled": true },
+    { "id": "word-count", "source": "The essay must be between 8 and 100 words.", "checker": "text.wordCount", "scope": { "extensions": ["md"] }, "expected": { "min": 8, "max": 100 }, "severity": "required", "enabled": true },
+    { "id": "references-heading", "source": "Include a section titled References.", "checker": "text.heading", "scope": { "extensions": ["md"] }, "expected": { "includes": "References" }, "severity": "required", "enabled": true },
+    { "id": "analysis-phrase", "source": "Include the exact phrase ‘independent analysis’.", "checker": "text.includes", "scope": { "extensions": ["md"] }, "expected": { "includes": "independent analysis" }, "severity": "required", "enabled": true },
+    { "id": "image-permission", "source": "Confirm every external image has permission.", "checker": "manual.confirm", "scope": {}, "expected": { "prompt": "Confirm every external image has permission." }, "severity": "required", "enabled": true }
+  ]
+}

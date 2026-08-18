@@ -1,0 +1,5 @@
+Provide exactly two files: campaign-hero.webp and caption.txt.
+Use only WebP and TXT files.
+Keep the WebP file under 200 KB.
+Keep the caption under 40 words and include the exact phrase ‘#partner’.
+Confirm the sponsor approved the final creative.

@@ -4,6 +4,15 @@
   "private": true,
   "type": "module",
   "description": "Lint any deliverable against any brief.",
+  "keywords": ["agent", "local-first", "preflight", "requirements", "validation"],
+  "homepage": "https://github.com/mihhhir08/brieflint#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mihhhir08/brieflint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mihhhir08/brieflint/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

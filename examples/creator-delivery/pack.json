@@ -1,0 +1,17 @@
+{
+  "$schema": "https://brieflint.dev/schema/pack-v1.json",
+  "version": 1,
+  "id": "examples.creator-delivery",
+  "name": "Creator delivery",
+  "description": "Checks a two-file sponsor delivery package.",
+  "rules": [
+    { "id": "file-count", "source": "Provide exactly two files: campaign-hero.webp and caption.txt.", "checker": "file.count", "scope": {}, "expected": { "equal": 2 }, "severity": "required", "enabled": true },
+    { "id": "file-extensions", "source": "Use only WebP and TXT files.", "checker": "file.extension", "scope": {}, "expected": { "oneOf": ["webp", "txt"] }, "severity": "required", "enabled": true },
+    { "id": "hero-name", "source": "Provide exactly two files: campaign-hero.webp and caption.txt.", "checker": "file.name", "scope": {}, "expected": { "equal": "campaign-hero.webp" }, "severity": "required", "enabled": true },
+    { "id": "caption-name", "source": "Provide exactly two files: campaign-hero.webp and caption.txt.", "checker": "file.name", "scope": {}, "expected": { "equal": "caption.txt" }, "severity": "required", "enabled": true },
+    { "id": "hero-size", "source": "Keep the WebP file under 200 KB.", "checker": "file.maxSize", "scope": { "extensions": ["webp"] }, "expected": { "max": 204800 }, "severity": "required", "enabled": true },
+    { "id": "caption-length", "source": "Keep the caption under 40 words and include the exact phrase ‘#partner’.", "checker": "text.wordCount", "scope": { "names": ["caption.txt"] }, "expected": { "max": 40 }, "severity": "required", "enabled": true },
+    { "id": "disclosure", "source": "Keep the caption under 40 words and include the exact phrase ‘#partner’.", "checker": "text.includes", "scope": { "names": ["caption.txt"] }, "expected": { "includes": "#partner" }, "severity": "required", "enabled": true },
+    { "id": "sponsor-approval", "source": "Confirm the sponsor approved the final creative.", "checker": "manual.confirm", "scope": {}, "expected": { "prompt": "Confirm the sponsor approved the final creative." }, "severity": "required", "enabled": true }
+  ]
+}

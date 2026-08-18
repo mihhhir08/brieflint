@@ -25,7 +25,16 @@ BriefLint should be easy to understand before it is easy to extend.
 - A failure to inspect is `review` or `skipped`, never `pass`.
 - User-facing evidence should explain the observation without exposing file contents unnecessarily.
 
-Setup and verification commands will be added with the implementation milestone.
+## Local setup
+
+```bash
+npm install
+npm test
+npm run build
+npm run dev
+```
+
+Node.js 24 or newer is required. Add fixtures under `examples/` or beside focused tests. Never commit a private brief or real user deliverable.
 
 ## Pull requests
 

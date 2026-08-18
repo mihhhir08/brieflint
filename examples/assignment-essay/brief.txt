@@ -1,0 +1,5 @@
+Submit exactly one Markdown file named final-essay.md.
+The essay must be between 8 and 100 words.
+Include a section titled References.
+Include the exact phrase ‘independent analysis’.
+Confirm every external image has permission.

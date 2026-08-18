@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brieflint.dev/schema/pack-v1.json",
+  "title": "BriefLint preflight pack",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["$schema", "version", "id", "name", "rules"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
+    "version": { "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rule" }
+    }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source", "checker", "scope", "expected", "severity", "enabled"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "checker": {
+          "enum": [
+            "file.count",
+            "file.name",
+            "file.extension",
+            "file.maxSize",
+            "text.wordCount",
+            "text.includes",
+            "text.heading",
+            "manual.confirm"
+          ]
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "extensions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+            "names": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+          }
+        },
+        "expected": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "equal": { "type": ["string", "number"] },
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "oneOf": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+            "includes": { "type": "string" },
+            "matches": { "type": "string" },
+            "prompt": { "type": "string" }
+          },
+          "minProperties": 1
+        },
+        "severity": { "enum": ["required", "advisory"] },
+        "enabled": { "type": "boolean" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

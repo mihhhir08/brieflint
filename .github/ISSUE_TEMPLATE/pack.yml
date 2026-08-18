@@ -1,0 +1,32 @@
+name: Pack or checker proposal
+description: Propose a reusable workflow or deterministic check.
+title: "[Pack]: "
+labels: [pack]
+body:
+  - type: input
+    id: audience
+    attributes:
+      label: Who repeats this preflight?
+      placeholder: Film creators delivering sponsor assets
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Real requirement examples
+      description: Provide at least two anonymized examples.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Verifiable evidence
+      description: What observation proves each requirement?
+    validations:
+      required: true
+  - type: textarea
+    id: uncertainty
+    attributes:
+      label: What must remain human review?
+    validations:
+      required: true
