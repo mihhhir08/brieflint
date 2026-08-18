@@ -2,9 +2,9 @@
 
 ## Brand idea
 
-BriefLint makes readiness visible. The identity combines the precision of blue-pencil proofing with the accessibility of an open-source developer tool.
+BriefLint makes readiness visible. The identity combines the clarity of a highlighted proof with the accessibility of an open-source developer tool.
 
-The identity is wordmark-only. “Brief” carries the primary weight and “Lint” shifts to cobalt at a lighter weight, making the product's two-part purpose visible without inventing a decorative symbol.
+The identity is wordmark-only. “Brief” carries the primary weight and “Lint” shifts to deep yellow at a lighter weight, making the product's two-part purpose visible without inventing a decorative symbol.
 
 ## Voice
 
@@ -17,7 +17,7 @@ The identity is wordmark-only. “Brief” carries the primary weight and “Lin
 ## Visual direction
 
 - Cool neutral surfaces: silver white, graphite, smoke gray
-- One cobalt accent for brand, action, and focus
+- One yellow accent family for brand, action, and focus
 - Green is reserved for real pass states backed by evidence
 - Soft 10-14 px radii for controls and containers
 - Large sans-serif typography with tight display spacing
@@ -25,20 +25,21 @@ The identity is wordmark-only. “Brief” carries the primary weight and “Lin
 - Layered proof-sheet planes and subtle fixed grain create material depth
 - Real material photography: paper, storage media, inspection tools, and finished deliverables
 
-The site respects the system light or dark preference. Individual sections do not change theme.
+The site uses one light theme throughout. Individual sections stay within the same cool proof-paper palette.
 
 ## Core tokens
 
-| Role | Light | Dark |
-| --- | --- | --- |
-| Page | `#f1f3f8` | `#181a20` |
-| Surface | `#f9faff` | `#20232b` |
-| Text | `#1d2029` | `#edf0f8` |
-| Muted text | `#626875` | `#adb3c0` |
-| Accent | `#304fc3` | `#91a6ff` |
-| Accent surface | `#dfe5fa` | `#283250` |
-| Success | `#237157` | `#6fc3a0` |
-| Success surface | `#dcebe4` | `#253b33` |
+| Role | Value |
+| --- | --- |
+| Page | `#f1f3f8` |
+| Surface | `#f9faff` |
+| Text | `#1d2029` |
+| Muted text | `#626875` |
+| Accent | `#e8bd3c` |
+| Accent text | `#715600` |
+| Accent surface | `#fff0ad` |
+| Success | `#237157` |
+| Success surface | `#dcebe4` |
 
 Warning and failure colors appear only when they communicate a real result state.
 
