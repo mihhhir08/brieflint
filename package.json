@@ -1,0 +1,14 @@
+{
+  "name": "brieflint",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lint any deliverable against any brief.",
+  "scripts": {
+    "test": "node --test src/**/*.test.ts"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "Apache-2.0"
+}
